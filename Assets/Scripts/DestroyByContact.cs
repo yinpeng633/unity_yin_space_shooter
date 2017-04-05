@@ -27,8 +27,8 @@ public class DestroyByContact : MonoBehaviour
         {
 			Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
         }
-        Destroy(other.gameObject);
-        Destroy(gameObject);
+        Destroy(other.gameObject);  //销毁撞击体
+        Destroy(gameObject);  //销毁被撞击体，即改脚本绑定的gameObject
     }
 
 }
