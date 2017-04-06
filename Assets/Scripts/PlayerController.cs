@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     // Use this for initialization
     private Rigidbody rb;
+    private AudioSource aus;
     public float speed;
 
     public float tilt; //飞船倾斜度随x方向速度系数
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        aus = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             nextFireTime = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation); //这里很好，不需要子弹集的整个对象，只需要他的位置信息就行了，有效节省了内存。全局变量只包含transform就行了。 现在的问题是，不断の实例化子弹对象，内存回被撑爆的。
+            aus.Play();
         }
     }
 

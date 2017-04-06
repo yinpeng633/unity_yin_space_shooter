@@ -9,6 +9,9 @@ public class GameController : MonoBehaviour
 
     //第一步完成 随机刷敌机任务。
     public GameObject hazard;  //这里是 随机刷的陨石块。
+    public GUIText scoreText;
+
+    private int score;
 
     public Vector3 spawnValues;
 
@@ -19,11 +22,14 @@ public class GameController : MonoBehaviour
     public float waveWait; //生产波间隔
 
 
+    
+
+
     //生产随机位置的陨石方法
     IEnumerator SpawnWaves()
     {
+        //这里屌炸天啊 感觉，yield c#的语法糖
         yield return new WaitForSeconds(startWait);
-
         while (true)
         {
             for (int i = 0; i < spawnCount; i++)
@@ -43,7 +49,20 @@ public class GameController : MonoBehaviour
     /// </summary>
     void Start()
     {
-       StartCoroutine(SpawnWaves());
+        score = 0;
+        UpdateScore();
+        StartCoroutine(SpawnWaves()); //这个方法估计就是把一个可枚举的事件序列,在游戏线程上，一个个遍历执行。
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = "得分：" + score;
+    }
+
+    public void AddScore(int newScoreValue)
+    {
+        score += newScoreValue;
+        UpdateScore();
     }
 
 
