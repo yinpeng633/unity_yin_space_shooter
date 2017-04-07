@@ -18,7 +18,7 @@ public class DestroyByContact : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+        // Debug.Log(other.name);
         if (other.tag == "Boundary")
         {
             return;
@@ -29,6 +29,7 @@ public class DestroyByContact : MonoBehaviour
         if (other.tag == "Player")
         {
 			Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            gameController.GameOver();
         }
 
         gameController.AddScore(itemScore);
