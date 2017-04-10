@@ -9,6 +9,7 @@ public class EvasiveManeuver : MonoBehaviour
     public Vector2 maneuverTime;
     public Vector2 maneuverWait;
     public float dodge;
+	public float smoothing;
     private float startZv;
     private float targetManeuver;
     // Use this for initialization
@@ -36,7 +37,7 @@ public class EvasiveManeuver : MonoBehaviour
         //     }
         //     return current + Mathf.Sign(target - current) * maxDelta;
         // }
-        float newManeuver = Mathf.MoveTowards(rb.velocity.x, targetManeuver, 2 * Time.deltaTime);
+        float newManeuver = Mathf.MoveTowards(rb.velocity.x, targetManeuver, smoothing * Time.deltaTime);
 
         rb.velocity = new Vector3(newManeuver, 0.0f, startZv);
 
