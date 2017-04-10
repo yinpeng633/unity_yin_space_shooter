@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyByContact : MonoBehaviour
 {
 
-    public GameObject arstroidExplosion; //陨石爆炸效果
+    public GameObject objectExplosion; //陨石爆炸效果
 
     public GameObject PlayerExplosion; //玩家飞机爆炸效果
     public int itemScore;
@@ -19,16 +19,20 @@ public class DestroyByContact : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log(other.name);
-        if (other.tag == "Boundary")
+        if (other.CompareTag("Boundary") || other.CompareTag("Enemy"))
         {
             return;
         }
 
-		Instantiate(arstroidExplosion, other.transform.position, other.transform.rotation);
+        if (objectExplosion != null)
+        {
+            Instantiate(objectExplosion, other.transform.position, other.transform.rotation);
+        }
+
 
         if (other.tag == "Player")
         {
-			Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
             gameController.GameOver();
         }
 

@@ -35,6 +35,7 @@ public class Done_EvasiveManeuver : MonoBehaviour
 	void FixedUpdate ()
 	{
 		float newManeuver = Mathf.MoveTowards (GetComponent<Rigidbody>().velocity.x, targetManeuver, smoothing * Time.deltaTime);
+		Debug.Log(newManeuver);
 		GetComponent<Rigidbody>().velocity = new Vector3 (newManeuver, 0.0f, currentSpeed);
 		GetComponent<Rigidbody>().position = new Vector3
 		(
